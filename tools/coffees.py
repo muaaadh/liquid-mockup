@@ -68,7 +68,7 @@ COFFEES = [
  c("Finezzo Pro","","Delicate and floral",5,["Jasmine","Orange blossom","Bergamot"],A,[],None,[],PR,"Professional",price_text=ASK),
  c("Decaffeinato Pro","","Full-bodied decaf",7,["Cocoa","Roasted cereal"],None,[],None,[],PR,"Professional",decaf=True,price_text=ASK),
  c("Ristresso Pro","","Intense and roasty",9,["Cocoa","Woody"],None,[],None,[],PR,"Professional",price_text=ASK),
- c("Ristresso Intenso Pro","","Bitter and full-bodied",12,["Spicy pepper","Woody"],None,[],None,[],PR,"Professional",price_text=ASK),
+ c("Ristresso Intenso Pro","","Bitter and full-bodied",12,["Spicy pepper","Woody"],B,[],None,[],PR,"Professional",price_text=ASK),
  c("Lungo Origin Guatemala Pro","","Silky, with dry malty notes",6,["Cereal","Malty"],B,["Guatemala"],None,[],PR,"Professional",price_text=ASK),
 ]
 # Tone for coffees with no printed intensity, so the bean still looks right.

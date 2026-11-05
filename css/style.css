@@ -6,12 +6,13 @@
 }
 
 :root {
-  --paper: #fbfaf7;
+  --paper: #faf3e1;
   --ink: #1f120a;
   --ink-soft: #6b5240;
   --crema: #b98a4e;
   --soak: #120702;
-  --tint: #efe6d8;
+  --tint: #f0e3c8;
+  --line: #e4d7ba;
   --gutter: clamp(20px, 4.4vw, 72px);
   --ease: cubic-bezier(.2, .75, .15, 1);
 }
@@ -96,10 +97,10 @@ html.locked, html.locked body { overflow: hidden; }
 /* ---------- hero ---------- */
 .hero {
   position: relative;
-  min-height: 82vh; min-height: 82svh;
+  min-height: max(60vh, 470px); min-height: max(60svh, 470px);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
-  padding: 72px var(--gutter) 32px;
+  padding: 72px var(--gutter) 12px;
 }
 .hero-mark { width: min(62vw, 880px); aspect-ratio: 3112 / 696; }
 .hero-mark img { width: 100%; }
@@ -122,13 +123,28 @@ html.locked, html.locked body { overflow: hidden; }
 .hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; margin-top: 24px; }
 .hero-cta .cta { margin-top: 0; }
 
+/* ---------- the coffee sea ---------- */
+/* Full bleed, and the fade lives on the box, so it stays seamless at any size. */
+.sea {
+  position: relative; z-index: 1;
+  aspect-ratio: 16 / 9; max-height: 92vh; min-height: 340px; width: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .35) 9%, #000 24%, #000 80%, rgba(0, 0, 0, .55) 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .35) 9%, #000 24%, #000 80%, rgba(0, 0, 0, .55) 90%, transparent 100%);
+}
+.sea picture, .sea img, .sea canvas { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 42% 50%; }
+.sea canvas { position: absolute; inset: 0; }
+.sea .mini { position: absolute; right: var(--gutter); bottom: 14%; color: var(--paper); text-decoration-color: currentColor; }
+.mini { min-height: 44px; padding: 0 2px; font-size: .9375rem; color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--crema); text-underline-offset: 4px; }
+.mini-row { display: flex; justify-content: flex-end; }
+
 /* ---------- resorts ---------- */
-.resorts { padding: 0 var(--gutter) clamp(32px, 6vh, 64px); }
-.island { width: min(100%, 1120px); margin: 0 auto; }
+.resorts { padding: 4px var(--gutter) clamp(32px, 6vh, 64px); }
 .resorts .sec-head { max-width: 680px; margin-top: 8px; }
 .rcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 40px); margin-top: 20px; }
-.rcards h3 { margin-top: 6px; font-weight: 500; font-size: 1.25rem; }
+.rcards .painting { border-radius: 14px; overflow: hidden; }
+.rcards h3 { margin-top: 12px; font-weight: 500; font-size: 1.25rem; }
 .rcards p { margin-top: 4px; color: var(--ink-soft); }
+.rcards a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--crema); text-underline-offset: 4px; }
 
 /* ---------- coffee ---------- */
 .coffee-sec { position: relative; padding: clamp(32px, 6vh, 56px) var(--gutter) clamp(48px, 9vh, 96px); }
@@ -182,7 +198,7 @@ html.locked, html.locked body { overflow: hidden; }
 .detail-desc { margin-top: 4px; color: var(--ink-soft); font-size: 1.125rem; }
 .meter { display: flex; align-items: center; gap: 12px; margin-top: 14px; color: var(--ink-soft); }
 .ticks { display: grid; grid-template-columns: repeat(13, 1fr); gap: 3px; flex: 1; max-width: 220px; }
-.ticks i { height: 12px; border-radius: 2px 3px 2px 3px; background: #eee6da; }
+.ticks i { height: 12px; border-radius: 2px 3px 2px 3px; background: #eadcbf; }
 .detail-body dl { display: grid; grid-template-columns: 72px 1fr; gap: 4px 12px; margin-top: 14px; }
 .detail-body dt { color: var(--ink-soft); }
 .price { margin-top: 14px; font-size: 1.125rem; font-weight: 500; }
@@ -221,10 +237,10 @@ html.locked, html.locked body { overflow: hidden; }
 .how-steps button {
   position: relative; display: block; width: 100%; padding: 14px 0 14px 46px;
   text-align: left; color: var(--ink-soft);
-  border-top: 1px solid #e6dfd3;
+  border-top: 1px solid var(--line);
   transition: color .3s;
 }
-.how-steps li:last-child button { border-bottom: 1px solid #e6dfd3; }
+.how-steps li:last-child button { border-bottom: 1px solid var(--line); }
 .how-steps button::before {
   content: counter(step); position: absolute; left: 0; top: 14px;
   width: 30px; height: 30px; border-radius: 50%;
@@ -236,10 +252,9 @@ html.locked, html.locked body { overflow: hidden; }
   background: var(--ink); transform: scaleX(var(--fill, 0)); transform-origin: 0 50%;
 }
 .how-steps b { display: block; font-weight: 500; font-size: 1.125rem; color: var(--ink); }
-.how-steps span { display: block; margin-top: 2px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .4s var(--ease), opacity .3s; }
+.how-steps span { display: block; margin-top: 2px; }
 .how-steps button.on { color: var(--ink-soft); }
 .how-steps button.on::before { background: var(--ink); color: var(--paper); }
-.how-steps button.on span { max-height: 4.6em; opacity: 1; }
 
 /* ---------- paintings ---------- */
 .painting { position: relative; margin: 0; }
@@ -251,13 +266,9 @@ html.locked, html.locked body { overflow: hidden; }
 .painting figcaption { margin-top: 4px; color: var(--ink-soft); text-align: center; }
 
 /* ---------- cup sizes ---------- */
-.cups {
-  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: center;
-  gap: clamp(16px, 4vw, 64px);
-  padding: clamp(32px, 7vh, 72px) var(--gutter);
-}
+.cups { padding: clamp(32px, 7vh, 72px) var(--gutter); }
 .rings {
-  --u: clamp(120px, 15.6vw, 240px);
+  --u: clamp(120px, 21vw, 300px);
   display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
   gap: 18px 12px; margin-top: clamp(20px, 4vh, 40px); overflow: clip;
 }
@@ -273,7 +284,7 @@ html.locked, html.locked body { overflow: hidden; }
 
 /* ---------- machines ---------- */
 .machines { padding: clamp(32px, 7vh, 72px) var(--gutter) 0; }
-.mhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 18px; margin-top: 30px; padding-bottom: 8px; border-bottom: 1px solid #e6dfd3; }
+.mhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 18px; margin-top: 30px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .mhead h3 { font-weight: 500; font-size: 1.375rem; }
 .mhead p { color: var(--ink-soft); }
 .mhead a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--crema); text-underline-offset: 4px; }
@@ -294,7 +305,7 @@ html.locked, html.locked body { overflow: hidden; }
 /* ---------- visit ---------- */
 .end { position: relative; z-index: 1; color: var(--paper); }
 .soak { width: 100%; height: clamp(240px, 34vw, 520px); object-fit: cover; object-position: bottom; display: block; margin-bottom: -2px; }
-.end-in { background: var(--soak); padding: 0 var(--gutter) 36px; }
+.end-in { background: var(--soak); padding: 0 var(--gutter) 36px; scroll-margin-top: 60px; }
 .end h2 { padding-top: 2vh; font-weight: 300; font-size: clamp(2.6rem, 6vw, 5rem); }
 .end-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px clamp(24px, 5vw, 80px);
@@ -328,14 +339,15 @@ html.locked, html.locked body { overflow: hidden; }
   .hero-mark { width: 84vw; }
   .filters { gap: 2px; flex-direction: column; }
   .seg-label { margin-right: 2px; }
-  .seg button { padding-inline: 8px; min-height: 44px; }
+  .seg { gap: 0; }
+  .seg-label { font-size: .9375rem; }
+  .seg button { padding-inline: 7px; min-height: 44px; font-size: .9375rem; }
   .grid { grid-template-columns: repeat(3, 1fr); }
   .grid:empty { min-height: 2700px; }
   .pod img { width: 80px; height: 80px; }
   .how-grid { grid-template-columns: 1fr; }
   .rcards { grid-template-columns: 1fr; }
-  .cups { display: block; }
-  .cups .painting { width: 78%; margin: 0 auto 8px; }
+  .sea { aspect-ratio: 4 / 5; }
   .rings { --u: 42vw; justify-content: space-around; }
   .mgrid { grid-template-columns: repeat(2, 1fr); }
   .mgrid img { height: 170px; }

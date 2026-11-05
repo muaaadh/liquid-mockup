@@ -134,18 +134,33 @@
     }, { threshold: .3 }).observe(document.getElementById('rings'));
   }
 
-  /* ---------- the film ---------- */
-  const film = document.getElementById('film');
-  if (reduced) {
-    film.src = film.dataset.src;
-    film.controls = true;
-    film.preload = 'metadata';
-  } else {
+  /* ---------- moving pictures ---------- */
+  /* Both load only when near, pick a small file on phones, and stop off screen. */
+  const smallScreen = innerWidth < 760;
+  for (const id of ['film']) {
+    const v = document.getElementById(id);
+    const btn = document.querySelector(`[data-pause="${id}"]`);
+    const source = () => { if (!v.src) v.src = smallScreen ? v.dataset.srcM : v.dataset.src; };
+    if (reduced) {
+      // Stills, unless someone chooses to play them.
+      btn.textContent = 'Play';
+      btn.addEventListener('click', () => {
+        source();
+        if (v.paused) { v.play(); btn.textContent = 'Pause'; } else { v.pause(); btn.textContent = 'Play'; }
+      });
+      continue;
+    }
+    let held = false;
+    btn.addEventListener('click', () => {
+      held = !held;
+      btn.textContent = held ? 'Play' : 'Pause';
+      if (held) v.pause(); else v.play().catch(() => {});
+    });
     new IntersectionObserver((entries) => {
       const on = entries[0].isIntersecting;
-      if (on && !film.src) film.src = innerWidth < 760 ? film.dataset.srcM : film.dataset.src;
-      if (on) film.play().catch(() => { film.controls = true; }); else film.pause();
-    }, { threshold: .25 }).observe(film);
+      if (on) source();
+      if (on && !held) v.play().catch(() => {}); else v.pause();
+    }, { threshold: .15 }).observe(v);
   }
 
   /* ---------- bar ---------- */

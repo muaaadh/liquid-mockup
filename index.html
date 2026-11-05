@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Liquid | Nespresso for Maldives resorts</title>
 <meta name="description" content="Liquid is the exclusive distributor of Nespresso in the Maldives, supplying resorts, hotels and offices with coffee, machines and aftersales service.">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="theme-color" content="#FAF3E1">
 <meta property="og:title" content="Liquid | Nespresso for Maldives resorts">
 <meta property="og:description" content="Exclusive distributor of Nespresso in the Maldives since 2009.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://muaaadh.github.io/liquid-mockup/">
+<meta property="og:image" content="https://muaaadh.github.io/liquid-mockup/assets/sea/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/urbanist.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
@@ -29,7 +32,7 @@
     <a href="#resorts">Resorts</a>
     <a href="#coffee">Coffee</a>
     <a href="#machines">Machines</a>
-    <a href="#visit">Visit</a>
+    <a href="#contact">Contact</a>
   </nav>
 </header>
 
@@ -47,10 +50,12 @@
     </div>
   </section>
 
+  <section class="sea" aria-label="A boat runs through a sea of coffee, leaving a wake of crema">
+    <picture><source media="(max-width: 700px)" srcset="assets/sea/sea-m.webp"><img src="assets/sea/sea.webp" width="1600" height="900" alt="" fetchpriority="high"></picture>
+    <button type="button" class="mini" data-pause="sea">Pause</button>
+  </section>
+
   <section class="resorts" id="resorts" aria-labelledby="t-resorts">
-    <figure class="painting island" data-seed="0.5,0.5">
-      <picture><source media="(max-width: 700px)" srcset="assets/maldives/island-m.webp"><img src="assets/maldives/island.webp" width="2000" height="944" alt="A resort island and its ring of overwater villas in a turquoise Maldivian lagoon" loading="lazy"></picture>
-    </figure>
     <div class="sec-head">
       <h2 id="t-resorts">For resorts and hotels</h2>
       <p>The Maldives tourism sector is our main market. Everything we supply is imported from Nespresso Switzerland.</p>
@@ -69,7 +74,7 @@
       <article>
         <figure class="painting" data-seed="0.5,0.4"><picture><source media="(max-width: 700px)" srcset="assets/maldives/cup-m.webp"><img src="assets/maldives/cup.webp" width="1200" height="800" alt="A cup of coffee set on the sand at the edge of the water" loading="lazy"></picture></figure>
         <h3>Service in Malé</h3>
-        <p>Free diagnosis at our Service Center. No repair starts until you approve the quote.</p>
+        <p>Free diagnosis at our Service Center. No repair starts until you approve the quote. <a href="mailto:sales@liquid.com.mv?subject=Machine%20service">Email us about a repair</a></p>
       </article>
     </div>
   </section>
@@ -79,7 +84,7 @@
       <div class="picker">
         <div class="sec-head">
           <h2 id="t-coffee">The coffee range</h2>
-          <p>Choose a capsule to see the coffee.</p>
+          <p>Choose a capsule to see the coffee. They run from lightest to darkest.</p>
         </div>
         <div class="filters">
           <div class="seg" role="group" aria-labelledby="l-bean">
@@ -98,7 +103,7 @@
           </div>
         </div>
         <p class="type-note" id="typeNote"></p>
-        <div class="grid" id="grid" role="group" aria-label="Coffees, lightest to darkest"></div>
+        <div class="grid" id="grid" role="group" aria-label="Coffees by intensity, milk coffees last"></div>
         <p class="empty" id="empty" hidden>No coffees match that choice. <button type="button" id="reset">Show all coffees</button></p>
         <noscript><p class="empty">See the <a href="https://drive.google.com/file/d/1EcH2iHNyFHpZPsKJGeVZNXzVaKZPt-7A/view">Original</a> and <a href="https://drive.google.com/file/d/1WwFaT_lDSmkSAPgLnaZtZZ9aFgGDoOtv/view">Vertuo</a> catalogues.</p></noscript>
       </div>
@@ -123,12 +128,13 @@
 
   <section class="how" id="how" aria-labelledby="t-how">
     <div class="sec-head">
-      <h2 id="t-how">How the machine works</h2>
+      <h2 id="t-how">How an Original machine works</h2>
       <p>One capsule, one button.</p>
     </div>
     <div class="film-wrap">
       <video class="film" id="film" muted loop playsinline preload="none" poster="assets/film/poster.webp" data-src="assets/film/machine.mp4" data-src-m="assets/film/machine-m.mp4" aria-label="A hand lifts the lever of a Nespresso machine, drops in a capsule and closes it, then coffee pours into a glass."></video>
     </div>
+    <p class="mini-row"><button type="button" class="mini" data-pause="film">Pause</button></p>
     <div class="how-grid">
       <div class="how-stage">
         <svg viewBox="70 -40 760 720" role="img" aria-label="Cutaway of a Nespresso machine: a capsule drops into the head, water from the tank is heated and pumped through it at 19 bars, coffee pours into a glass, and the used capsule falls into a container.">
@@ -246,24 +252,24 @@
           </g>
         </svg>
       </div>
+      <div class="how-side">
       <ol class="how-steps">
         <li><button type="button"><b>Drop in a capsule</b><span>Lift the lever, drop a capsule in and close it.</span></button></li>
-        <li><button type="button"><b>Water heats up</b><span>Press the button. Water from the tank heats in as little as 25 seconds.</span></button></li>
-        <li><button type="button"><b>19 bars of pressure</b><span>The capsule is pierced and the pump drives hot water through the coffee.</span></button></li>
+        <li><button type="button"><b>Water heats up</b><span>Press the button. From cold, water heats in as little as 25 seconds.</span></button></li>
+        <li><button type="button"><b>19 bars of pressure</b><span>The pump drives hot water through the capsule at up to 19 bars.</span></button></li>
         <li><button type="button"><b>Coffee pours</b><span>Espresso runs into the cup with crema on top.</span></button></li>
         <li><button type="button"><b>Capsule drops away</b><span>Lift the lever and the used capsule falls into the container.</span></button></li>
       </ol>
+      <p class="mini-row how-ctl"><button type="button" class="mini" id="howToggle">Pause</button></p>
+      </div>
     </div>
   </section>
 
   <section class="cups" aria-labelledby="t-cups">
-    <figure class="painting" data-seed="0.5,0.34">
-      <img src="assets/paint/drip.webp" width="1500" height="1688" alt="Espresso falling from a portafilter, painted in coffee" loading="lazy">
-    </figure>
     <div class="cups-text">
       <div class="sec-head">
         <h2 id="t-cups">Cup sizes</h2>
-        <p>Every coffee is made for one or two of these.</p>
+        <p>Every Original and Vertuo coffee is made for one or two of these.</p>
       </div>
       <ul class="rings" id="rings">
         <li style="--k:.33;--r:40deg"><img src="assets/rings/ring0.webp" alt="" loading="lazy"><p>Ristretto<span>25 ml</span></p></li>
@@ -293,7 +299,7 @@
     </div>
     <div class="mhead">
       <h3>Original</h3>
-      <p>Prices include GST.</p>
+      <p>Prices include GST. Vertuo capsules need a Vertuo machine, so ask us about availability.</p>
     </div>
     <div class="mgrid">
       <figure><img src="assets/machines/essenza-mini.webp" srcset="assets/machines/essenza-mini-m.webp 420w, assets/machines/essenza-mini.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="470" height="760" alt="Essenza Mini machine" loading="lazy"><figcaption>Essenza Mini<span>MVR 2,735</span></figcaption></figure>
@@ -307,10 +313,10 @@
   </section>
 </main>
 
-<footer class="end" id="visit" aria-labelledby="t-end">
+<footer class="end" aria-labelledby="t-end">
   <img class="soak" src="assets/soak.webp" alt="" loading="lazy">
-  <div class="end-in">
-    <h2 id="t-end">Visit us in Malé</h2>
+  <div class="end-in" id="contact">
+    <h2 id="t-end">Contact us in Malé</h2>
     <div class="end-grid">
       <address>
         <p>M. Bageechage, 1st floor<br>Fareedhee Magu, Malé</p>
@@ -342,6 +348,7 @@
 <script src="js/data.js" onerror="document.documentElement.classList.remove('js')"></script>
 <script src="js/wet.js" onerror="document.documentElement.classList.remove('js')"></script>
 <script src="js/coffee.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/sea.js" onerror="document.documentElement.classList.remove('js')"></script>
 <script src="js/how.js" onerror="document.documentElement.classList.remove('js')"></script>
 <script src="js/main.js" onerror="document.documentElement.classList.remove('js')"></script>
 </body>

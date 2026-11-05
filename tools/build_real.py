@@ -103,12 +103,30 @@ def wash_photo(name, src, width, crop=None, spot=(.5, .5, .62, .62), seed=3, rag
     print(name, width, h, os.path.getsize(f"{A}/maldives/{name}.webp") // 1024, "KB")
 
 
+def plain_photo(name, src, crop=None, width=1200, ratio=1.5):
+    """A clean 3:2 crop in full colour, no fades."""
+    im = Image.open(src).convert("RGB")
+    if crop:
+        w, h = im.size
+        im = im.crop((int(crop[0] * w), int(crop[1] * h), int(crop[2] * w), int(crop[3] * h)))
+    w, h = im.size
+    if w / h > ratio:
+        cut = (w - h * ratio) / 2
+        im = im.crop((int(cut), 0, int(w - cut), h))
+    else:
+        cut = (h - w / ratio) / 2
+        im = im.crop((0, int(cut), w, int(h - cut)))
+    big = im.resize((width, round(width / ratio)), Image.LANCZOS)
+    big.save(f"{A}/maldives/{name}.webp", "WEBP", quality=80, method=6)
+    big.resize((720, 480), Image.LANCZOS).save(f"{A}/maldives/{name}-m.webp", "WEBP", quality=76, method=6)
+    print(name, os.path.getsize(f"{A}/maldives/{name}.webp") // 1024, "KB")
+
+
 M = f"{SP}/src/maldives"
 if want("maldives"):
-    wash_photo("island", f"{M}/aerial-1599832976672-5923b10683d4.jpg", 2000, crop=(0, .1, 1, .94), spot=(.5, .52, .66, .8), seed=4, ragged=.38, fade=.28)
-    wash_photo("deck", f"{M}/room-2549018.jpg", 1200, crop=(.06, .02, 1, 1), spot=(.5, .5, .76, .78), seed=9, fade=.22, ragged=.4, ratio=1.5)
-    wash_photo("restaurant", f"{M}/dining-1722137148792-e3d166247290.jpg", 1200, crop=(.05, 0, .9, 1), spot=(.5, .5, .76, .8), seed=13, fade=.22, ragged=.4, ratio=1.5)
-    wash_photo("cup", f"{M}/cup-1546869134-cf00bc9f79fc.jpg", 1200, crop=(0, .24, 1, .684), spot=(.5, .5, .76, .78), seed=17, fade=.22, ragged=.4, ratio=1.5)
+    plain_photo("deck", f"{M}/room-2549018.jpg", crop=(.06, .02, 1, 1))
+    plain_photo("restaurant", f"{M}/dining-1722137148792-e3d166247290.jpg", crop=(.05, 0, .9, 1))
+    plain_photo("cup", f"{M}/cup-1546869134-cf00bc9f79fc.jpg", crop=(0, .24, 1, .684))
 
 
 if want("film"):

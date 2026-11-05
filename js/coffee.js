@@ -85,7 +85,16 @@
       const dd = document.createElement('dd'); dd.textContent = v;
       dl.append(dt, dd);
     }
-    $('dPrice').textContent = c.price_text || `MVR ${c.price} for a sleeve of 10`;
+    const price = $('dPrice');
+    price.textContent = '';
+    if (c.price_text) {
+      const ask = document.createElement('a');
+      ask.href = `mailto:sales@liquid.com.mv?subject=${encodeURIComponent(`${c.name} pricing`)}`;
+      ask.textContent = 'Ask us for pricing';
+      price.append('Box of 50 pods. ', ask);
+    } else {
+      price.textContent = `MVR ${c.price} for a sleeve of 10, including GST`;
+    }
     status.textContent = `${c.name}. ${c.desc}. ${words.textContent}.`;
   }
 
@@ -113,6 +122,8 @@
   sheet.addEventListener('close', () => {
     detail.append(body);
     document.documentElement.classList.remove('locked');
+    // Safari does not focus a button on tap, so hand focus back by hand.
+    if (current) current.el.focus({ preventScroll: true });
     if (narrow.matches) mark(null);
   });
   $('dClose').addEventListener('click', () => sheet.close());

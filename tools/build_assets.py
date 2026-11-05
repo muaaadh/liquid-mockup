@@ -136,7 +136,7 @@ def ring(S, seed):
 
 if want("rings"):
     for i in range(5):
-        W.save(ring(1000, 50 + i * 3), f"{A}/rings/ring{i}.webp", quality=80)
+        W.save(ring(1000, 50 + i * 3), f"{A}/rings/ring{i}.webp", quality=80, width=480)
     print("rings")
 
 

@@ -75,7 +75,8 @@
     needle.setAttribute('transform', `rotate(${mix(-120, 120, pressure).toFixed(2)} 308 402)`);
     bars.textContent = Math.round(pressure * 19);
 
-    const pierce = both(seg(t, 5.7, 6.1)) * (1 - seg(t, 11, 11.3));
+    // Closing the lever is what pierces the capsule.
+    const pierce = both(seg(t, 1.8, 2.35)) * (1 - seg(t, 11.3, 11.6));
     spikes.setAttribute('transform', `translate(${(pierce * 12).toFixed(2)} 0)`);
 
     // Coffee runs to the spout, falls, and the cup fills under a growing crema.
@@ -117,18 +118,31 @@
   }
 
   /* ---------- clock ---------- */
-  let t = 0, last = 0, running = false, visible = false;
+  let t = 0, last = 0, running = false, visible = false, paused = false, holdAt = null;
+  const toggle = document.getElementById('howToggle');
 
   function tick(now) {
     if (!running) return;
     t += Math.min(.05, (now - last) / 1000);
     last = now;
     if (t >= LOOP) t = 0;
+    if (holdAt !== null && t >= holdAt) {
+      // A tapped step plays through, then waits to be read.
+      t = holdAt - .02;
+      render(t);
+      pause();
+      return;
+    }
     render(t);
     requestAnimationFrame(tick);
   }
+  function pause() {
+    running = false;
+    paused = true;
+    toggle.textContent = 'Play';
+  }
   function start() {
-    if (running || reduced) return;
+    if (running || reduced || paused) return;
     running = true;
     last = performance.now();
     requestAnimationFrame(tick);
@@ -141,8 +155,17 @@
   buttons.forEach((b, i) => b.addEventListener('click', () => {
     t = STEPS[i] + (reduced ? STEPS_REST[i] : .01);
     render(t);
+    holdAt = STEPS[i + 1] ?? 14.4;
+    paused = false;
+    toggle.textContent = 'Pause';
     if (visible) start();
   }));
+
+  toggle.addEventListener('click', () => {
+    holdAt = null;
+    if (paused) { paused = false; toggle.textContent = 'Pause'; start(); } else { stop(); pause(); }
+  });
+  if (reduced) toggle.hidden = true;
 
   new IntersectionObserver((entries) => {
     visible = entries[0].isIntersecting;
