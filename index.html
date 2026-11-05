@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liquid | Nespresso in the Maldives</title>
+<meta name="description" content="Liquid is the exclusive distributor of Nespresso in the Maldives. Explore all 46 coffees, find a machine and visit the boutique in Malé.">
+<meta name="theme-color" content="#FBFAF7">
+<meta property="og:title" content="Liquid | Nespresso in the Maldives">
+<meta property="og:description" content="Elevate your coffee experience.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/urbanist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Store","name":"Liquid Pvt Ltd","description":"Exclusive distributor of Nespresso in the Maldives","telephone":"+9603300773","email":"sales@liquid.com.mv","address":{"@type":"PostalAddress","streetAddress":"M. Bageechage, 1st floor, Fareedhee Magu","addressLocality":"Malé","addressCountry":"MV"},"sameAs":["https://www.instagram.com/liquid.mv/"]}
+</script>
+</head>
+<body>
+<a class="skip" href="#coffee">Skip to the coffees</a>
+
+<!-- The paper's wet layer: the wordmark, every brushstroke and every bloom live here. -->
+<canvas id="wet" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <a class="bar-logo" href="#top" aria-label="Liquid, back to top"><img src="assets/logo.svg" alt="" width="84" height="19"></a>
+  <nav aria-label="Main">
+    <a href="#coffee">Coffee</a>
+    <a href="#machines">Machines</a>
+    <a href="#boutique">Boutique</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <h1 class="sr">Liquid, exclusive distributor of Nespresso in the Maldives</h1>
+    <div class="hero-mark" id="heroMark" aria-hidden="true"><img src="assets/logo.svg" alt=""></div>
+    <div class="hero-foot">
+      <p class="hero-line">Elevate your coffee experience.</p>
+      <p class="hero-note">Exclusive distributor of Nespresso in the Maldives</p>
+    </div>
+  </section>
+
+  <section class="branch" aria-labelledby="t-branch">
+    <figure class="painting" data-seed="0.72,0.38">
+      <img src="assets/paint/branch.webp" width="1700" height="1134" alt="Coffee cherries ripening on a branch, painted in coffee" loading="lazy">
+    </figure>
+    <h2 class="say" id="t-branch">from the branch,</h2>
+  </section>
+
+  <section class="bean-sec" id="coffee" aria-labelledby="t-bean">
+    <div class="bean-head">
+      <h2 class="say" id="t-bean">to the bean,</h2>
+      <p class="hint"><span id="beanCount">46</span> coffees, one bean each. Choose one.</p>
+    </div>
+
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Arrange the beans by">
+        <button type="button" data-mode="scatter" aria-pressed="true">Scattered</button>
+        <button type="button" data-mode="intensity" aria-pressed="false">Intensity</button>
+        <button type="button" data-mode="species" aria-pressed="false">Species</button>
+        <button type="button" data-mode="origin" aria-pressed="false">Origin</button>
+      </div>
+      <div class="seg" role="group" aria-label="Show coffees for">
+        <button type="button" data-line="all" aria-pressed="true">All</button>
+        <button type="button" data-line="Original" aria-pressed="false">Original</button>
+        <button type="button" data-line="Vertuo" aria-pressed="false">Vertuo</button>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <img class="map" id="map" src="assets/map.webp" alt="" loading="lazy">
+      <div class="marks" id="marks" aria-hidden="true"></div>
+      <div class="beans" id="beans"></div>
+      <div class="tip" id="tip" aria-hidden="true"></div>
+
+      <aside class="card" id="card" aria-live="polite" hidden>
+        <div class="card-top">
+          <div>
+            <h3 id="cName"></h3>
+            <p id="cDesc"></p>
+          </div>
+          <img id="cCapsule" alt="">
+        </div>
+        <div class="meter" id="cMeter"></div>
+        <dl id="cFacts"></dl>
+        <p class="price" id="cPrice"></p>
+        <div class="card-nav">
+          <button type="button" id="cPrev">Previous</button>
+          <button type="button" id="cNext">Next</button>
+          <button type="button" id="cClose">All coffees</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="cup" aria-labelledby="t-cup">
+    <figure class="painting drip" data-seed="0.5,0.34">
+      <img src="assets/paint/drip.webp" width="1500" height="1688" alt="Espresso falling from a portafilter, painted in coffee" loading="lazy">
+    </figure>
+    <h2 class="say" id="t-cup">to the cup,</h2>
+
+    <div class="rings" id="rings" role="list" aria-label="Cup sizes">
+      <div class="ring" role="listitem" style="--x:7;--y:66;--d:12.5;--mx:21;--my:10;--md:32;--r:40deg"><img src="assets/rings/ring0.webp" alt="" loading="lazy"><p>Ristretto<span>25 ml</span></p></div>
+      <div class="ring" role="listitem" style="--x:19;--y:36;--d:15.8;--mx:68;--my:15;--md:40;--r:200deg"><img src="assets/rings/ring1.webp" alt="" loading="lazy"><p>Espresso<span>40 ml</span></p></div>
+      <div class="ring" role="listitem" style="--x:34.5;--y:62;--d:26.3;--mx:34;--my:37;--md:66;--r:120deg"><img src="assets/rings/ring2.webp" alt="" loading="lazy"><p>Lungo<span>110 ml</span></p></div>
+      <div class="ring" role="listitem" style="--x:56;--y:40;--d:30.7;--mx:62;--my:62;--md:76;--r:300deg"><img src="assets/rings/ring3.webp" alt="" loading="lazy"><p>Gran lungo<span>150 ml</span></p></div>
+      <div class="ring" role="listitem" style="--x:81;--y:56;--d:38;--mx:40;--my:84;--md:92;--r:10deg"><img src="assets/rings/ring4.webp" alt="" loading="lazy"><p>Mug<span>230 ml</span></p></div>
+    </div>
+
+    <div class="pair">
+      <figure class="painting" data-seed="0.5,0.55">
+        <img src="assets/paint/glass.webp" width="1500" height="1545" alt="An espresso in a small glass on a saucer, painted in coffee" loading="lazy">
+        <figcaption>Short and hot</figcaption>
+      </figure>
+      <figure class="painting" data-seed="0.5,0.6">
+        <img src="assets/paint/swirl.webp" width="1300" height="1591" alt="Milk swirling through iced coffee in a tall glass, painted in coffee" loading="lazy">
+        <figcaption>Long, over ice</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mach" id="machines" aria-labelledby="t-mach">
+    <div class="mach-pin">
+      <h2 class="say" id="t-mach">to your counter,</h2>
+      <div class="mach-row" id="machRow" tabindex="0" aria-label="Nespresso machines">
+        <figure><img src="assets/machines/essenza.webp" alt="Essenza Mini, painted in coffee" loading="lazy"><figcaption>Essenza Mini<span>MVR 2,735</span></figcaption></figure>
+        <figure><img src="assets/machines/inissia.webp" alt="Inissia, painted in coffee" loading="lazy"><figcaption>Inissia<span>MVR 2,860</span></figcaption></figure>
+        <figure><img src="assets/machines/pixie.webp" alt="Pixie, painted in coffee" loading="lazy"><figcaption>Pixie<span>MVR 4,337</span></figcaption></figure>
+        <figure><img src="assets/machines/citiz.webp" alt="CitiZ, painted in coffee" loading="lazy"><figcaption>CitiZ<span>MVR 4,940</span></figcaption></figure>
+        <figure><img src="assets/machines/citiz-milk.webp" alt="CitiZ and Milk, painted in coffee" loading="lazy"><figcaption>CitiZ &amp; Milk<span>MVR 7,395</span></figcaption></figure>
+        <figure><img src="assets/machines/lattissima.webp" alt="Lattissima One, painted in coffee" loading="lazy"><figcaption>Lattissima One<span>MVR 8,020</span></figcaption></figure>
+        <figure><img src="assets/machines/creatista.webp" alt="Creatista Plus, painted in coffee" loading="lazy"><figcaption>Creatista Plus<span>MVR 11,125</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="end" id="boutique" aria-labelledby="t-end">
+  <img class="soak" src="assets/soak.webp" alt="" loading="lazy">
+  <div class="end-in">
+    <h2 class="say" id="t-end">in Malé.</h2>
+    <div class="end-grid">
+      <address>
+        <p>M. Bageechage, 1st floor<br>Fareedhee Magu, Malé</p>
+        <p><a href="tel:+9603300773">+960 330 0773</a><br><a href="mailto:sales@liquid.com.mv">sales@liquid.com.mv</a><br><a href="https://www.instagram.com/liquid.mv/" rel="noopener">Instagram</a></p>
+      </address>
+      <div>
+        <p class="end-label">Catalogues</p>
+        <ul>
+          <li><a href="https://drive.google.com/file/d/1EcH2iHNyFHpZPsKJGeVZNXzVaKZPt-7A/view" rel="noopener">Original coffee</a></li>
+          <li><a href="https://drive.google.com/file/d/1WwFaT_lDSmkSAPgLnaZtZZ9aFgGDoOtv/view" rel="noopener">Vertuo coffee</a></li>
+          <li><a href="https://drive.google.com/file/d/1YHPsM6KBMPb8kv93HlFuj1djqPL2Dp-k/view" rel="noopener">Original machines</a></li>
+          <li><a href="https://drive.google.com/file/d/1WDLACBqDJ_V2Joi8l4BOWecHFzf9UVZ2/view" rel="noopener">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="end-label">For resorts and offices</p>
+        <p>Nespresso Professional coffee and machines, with aftersales service.</p>
+        <p><a href="mailto:sales@liquid.com.mv?subject=Nespresso%20for%20business">Email the team</a></p>
+      </div>
+    </div>
+    <div class="end-foot">
+      <img src="assets/logo.svg" alt="Liquid" width="120" height="27">
+      <p>Liquid Pvt Ltd, exclusive distributor of Nespresso in the Maldives since 2009.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/logo.js"></script>
+<script src="js/data.js"></script>
+<script src="js/wet.js"></script>
+<script src="js/beans.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
