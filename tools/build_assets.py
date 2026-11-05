@@ -50,14 +50,15 @@ if want("beans"):
 
 
 # ---- capsules from the catalogue -------------------------------------------
-OC = {"Capriccio":2,"Volluto":6,"Volluto Decaffeinato":12,"Cosi":14,"Napoli":16,"Kazaar":22,"Ristretto":38,
-      "Ristretto Decaffeinato":46,"Arpeggio":56,"Arpeggio Decaffeinato":58,"Arpeggio Extra":64,"Roma":74,"Venezia":76,
-      "Livanto":80,"India":92,"Indonesia":94,"Colombia":100,"Nicaragua":106,"Ethiopia":112,"Rio de Janeiro":126,
-      "Istanbul":128,"Paris":132,"Shanghai":136,"Buenos Aires":142,"Cape Town":144,"Stockholm":154,"Tokyo":160,
-      "Vienna":168,"Vienna Decaffeinato":166,"Corto":174,"Scuro":176,"Chiaro":194,"Caramello":192,"Vaniglia":196,
-      "Cioccolatino":206,"Nocciola":208}
-VC = {"Voltesso":16,"Altissio":18,"Altissio Decaffeinato":20,"Il Caffè":10,"Ristretto Intenso":14,"Stormio":24,
-      "Melozio":42,"Roasted Hazelnut":36,"Golden Caramel":38,"Costa Rica":50}
+# Keyed by coffee id. Checked row by row against the catalogue pages.
+OC = {"capriccio":2,"volluto":6,"volluto-decaffeinato":12,"cosi":14,"napoli":16,"kazaar":22,"ristretto":38,
+      "ristretto-decaffeinato":46,"arpeggio":56,"arpeggio-decaffeinato":58,"arpeggio-extra":64,"roma":74,"venezia":76,
+      "livanto":80,"india":94,"indonesia":92,"colombia":100,"nicaragua":112,"ethiopia":106,"rio-de-janeiro":126,
+      "istanbul":128,"paris":132,"shanghai":136,"buenos-aires":142,"cape-town":144,"stockholm":154,"tokyo":160,
+      "vienna":168,"vienna-decaffeinato":166,"corto":176,"scuro":174,"chiaro":194,"caramello":192,"vaniglia":196,
+      "cioccolatino":206,"nocciola":208}
+VC = {"voltesso":16,"altissio":18,"altissio-decaffeinato":20,"il-caffe":10,"ristretto-intenso":14,"stormio":24,
+      "melozio":42,"roasted-hazelnut":36,"golden-caramel":38,"costa-rica":50}
 
 
 def with_mask(pre, pdf, n):
@@ -73,11 +74,11 @@ def with_mask(pre, pdf, n):
 
 if want("capsules"):
     for co in COFFEES:
-        src = ("oc", "original-coffee", OC[co["name"]]) if co["name"] in OC else ("vc", "vertuo-coffee", VC[co["name"]])
+        src = ("oc", "original-coffee", OC[co["id"]]) if co["id"] in OC else ("vc", "vertuo-coffee", VC[co["id"]])
         im = with_mask(*src)
-        if co["name"] in ("Vaniglia", "Cioccolatino"):   # the catalogue stacks these two in one image
+        if co["id"] in ("vaniglia", "cioccolatino"):   # the catalogue stacks these two in one image
             half = im.height // 2
-            im = im.crop((0, 0, im.width, half)) if co["name"] == "Vaniglia" else im.crop((0, half, im.width, im.height))
+            im = im.crop((0, 0, im.width, half)) if co["id"] == "vaniglia" else im.crop((0, half, im.width, im.height))
         box = im.getchannel("A").point(lambda v: 255 if v > 12 else 0).getbbox()
         if box:
             im = im.crop(box)
