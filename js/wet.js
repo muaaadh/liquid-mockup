@@ -1,8 +1,7 @@
 /* The wet layer.
  *
- * A small GPU fluid simulation sits behind the page. Its dye is coffee, so the cursor
- * drags pigment across the paper, the wordmark can be smeared and slowly soaks back,
- * and the rest of the site can call Wet.bloom() to drop a wash anywhere.
+ * A small GPU fluid simulation sits behind the hero. Its dye is coffee, so the cursor
+ * drags pigment across the paper and the wordmark can be smeared, then slowly soaks back.
  *
  * Dye texture: x = pigment density, y = density * tone (0 weak coffee, 1 espresso).
  * Display uses the same Beer-Lambert coffee absorption as tools/wash.py, so what is
@@ -22,7 +21,7 @@
 
   if (!canRender) {
     root.classList.add('no-wet');
-    window.Wet = { bloom() {}, active: false };
+    window.Wet = { active: false };
     return;
   }
   gl.getExtension('OES_texture_float_linear');
@@ -389,7 +388,7 @@
     into(velocity.write); velocity.swap();
 
     bind(0, velocity.read.tex, u.uVel); bind(1, dye.read.tex, u.uSrc);
-    gl.uniform1f(u.uFade, time < 5 ? .55 : .24); gl.uniform1f(u.uStir, 0);
+    gl.uniform1f(u.uFade, time < 5 ? 1.1 : .24); gl.uniform1f(u.uStir, 0);
     into(dye.write); dye.swap();
 
     if (heroOn) {
@@ -416,9 +415,11 @@
   /* ---------- input ---------- */
   const toUv = (x, y) => [x / canvas.clientWidth, 1 - y / canvas.clientHeight];
   let px = null, py = null, sleepAt = 0;
-  const wake = (ms = 9000) => { sleepAt = performance.now() + ms; };
+  const wake = (ms = 4000) => { sleepAt = performance.now() + ms; };
 
   function brush(x, y) {
+    // The paint belongs to the hero. Past it, the page stays still and easy to read.
+    if (y + scrollY > heroBottom) { px = null; return; }
     if (px === null) { px = x; py = y; return; }
     const dx = x - px, dy = y - py, dist = Math.hypot(dx, dy);
     if (dist < 1) return;
@@ -456,10 +457,8 @@
   const start = performance.now();
   let last = start, lastY = scrollY, frames = 0, spent = 0, tuned = false;
 
-  // The opening: one heavy drop lands on the Q and throws a wash across the sheet.
-  queue.push({ x: drop[0], y: drop[1], r: .012, vr: .05, ink: .62, tone: .62, burst: 70 });
-  queue.push({ x: drop[0] - .12, y: drop[1] + .07, r: .0022, vr: .01, ink: .3, tone: .5, burst: 26 });
-  queue.push({ x: drop[0] + .16, y: drop[1] - .08, r: .0034, vr: .012, ink: .34, tone: .5, burst: 30 });
+  // The opening: one drop lands on the Q.
+  queue.push({ x: drop[0], y: drop[1], r: .005, vr: .03, ink: .5, tone: .62, burst: 40 });
 
   function frame(now) {
     requestAnimationFrame(frame);
@@ -477,7 +476,7 @@
     const reveal = Math.max(0, Math.min(2.2, (t - .7) * (t - .7) * .5 + (t - .7) * .36));
     const rate = 1 - Math.exp(-(t < 3.6 ? 7 : 1.7) * dt);
     // The opening wash swirls freely, then the sheet calms so the word can hold.
-    const stir = t < 1.8 ? .3 * (1 - t / 1.8) + .004 : .004;
+    const stir = t < 1.8 ? .1 * (1 - t / 1.8) + .004 : .004;
 
     flush();
     step(dt, dy / canvas.clientHeight, t, heroOn, rate, reveal, stir);
@@ -494,22 +493,5 @@
   }
   requestAnimationFrame(frame);
 
-  window.Wet = {
-    active: true,
-    /* Drop a wash at a screen point. tone 0..1, reach is a fraction of screen height. */
-    bloom(x, y, { reach = .09, ink = .34, tone = .6, push = 260 } = {}) {
-      const [u, v] = toUv(x, y);
-      // Several overlapping pools, so a wash spreads like water and not like a stamp.
-      const pools = reach < .04 ? 1 : 6;
-      for (let i = 0; i < pools; i++) {
-        const a = Math.random() * 6.283, d = i ? reach * (.5 + Math.random() * .75) : 0;
-        const r = reach * (i ? .32 + Math.random() * .42 : .8);
-        queue.push({
-          x: u + Math.cos(a) * d / aspect, y: v + Math.sin(a) * d,
-          r: r * r, vr: r * r * 2.4, ink: ink * (.7 + Math.random() * .5), tone, burst: push * (i ? .5 : 1),
-        });
-      }
-      wake();
-    },
-  };
+  window.Wet = { active: true };
 })();

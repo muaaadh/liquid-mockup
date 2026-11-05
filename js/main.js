@@ -1,37 +1,20 @@
-/* Page motion. One scroll loop, with geometry cached outside it. */
+/* Page motion: paintings bleed in once, cup rings draw once, and nothing else moves on its own. */
 (() => {
   'use strict';
 
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
-  /* ---------- headings soak into the paper a letter at a time ---------- */
-  document.querySelectorAll('.say').forEach((h) => {
-    const text = h.textContent;
-    h.setAttribute('aria-label', text);
-    h.textContent = '';
-    let n = 0;
-    text.split(' ').forEach((word, wi, all) => {
-      const w = document.createElement('span');
-      w.className = 'w';
-      w.setAttribute('aria-hidden', 'true');
-      for (const ch of word) {
-        const c = document.createElement('span');
-        c.textContent = ch;
-        c.style.setProperty('--i', n++);
-        w.append(c);
-      }
-      h.append(w);
-      if (wi < all.length - 1) h.append(' ');
-    });
-  });
-  const soak = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); soak.unobserve(e.target); }
-  }, { threshold: .4 });
-  document.querySelectorAll('.say').forEach((h) => soak.observe(h));
+  function play(ms, draw) {
+    const start = performance.now();
+    (function frame(now) {
+      const t = Math.min(1, (now - start) / ms);
+      draw(1 - (1 - t) ** 2.4);
+      if (t < 1) requestAnimationFrame(frame);
+    })(start);
+  }
 
-  /* ---------- paintings bleed in as you scroll ---------- */
+  /* ---------- paintings ---------- */
   const REVEAL_FRAG = `
     precision highp float;
     varying vec2 v;
@@ -59,7 +42,7 @@
     }`;
   const REVEAL_VERT = `attribute vec2 a;varying vec2 v;void main(){v=vec2(a.x*.5+.5,.5-a.y*.5);gl_Position=vec4(a,0.,1.);}`;
 
-  function paintingGL(fig) {
+  function paintingGL(fig, onReady) {
     const img = fig.querySelector('img');
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
@@ -77,7 +60,7 @@
     gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
     const uP = gl.getUniformLocation(prog, 'p');
     const seed = (fig.dataset.seed || '.5,.5').split(',').map(Number);
-    let ready = false;
+    const api = { draw(p) { gl.uniform1f(uP, p); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); } };
     const load = () => {
       try {
         canvas.width = img.naturalWidth;
@@ -92,130 +75,80 @@
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.uniform1f(gl.getUniformLocation(prog, 'asp'), canvas.width / canvas.height);
         gl.uniform2f(gl.getUniformLocation(prog, 'seed'), seed[0], seed[1]);
-        ready = true;
-        gl.uniform1f(uP, 0);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        api.draw(0);
         fig.classList.add('gl');
         img.after(canvas);
+        onReady(api);
       } catch (err) {
         // Opened straight from disk: browsers refuse the texture, so the plain image stays.
-        ready = false;
+        onReady(null);
       }
     };
     img.loading = 'eager';
     if (img.complete && img.naturalWidth) load(); else img.addEventListener('load', load, { once: true });
-    return {
-      draw(p) {
-        if (!ready) return;
-        gl.uniform1f(uP, p);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      },
-    };
+    return api;
   }
 
-  const paintings = [...document.querySelectorAll('.painting')].map((el) => ({
-    el, top: 0, height: 0, p: 0, shown: -1, gl: null,
-  }));
-  // Each painting wakes up a little before it is needed, so the first screen stays light.
-  if (!reduced) {
+  const paintings = [...document.querySelectorAll('.painting')];
+  if (reduced) {
+    paintings.forEach((el) => el.classList.add('seen'));
+  } else {
+    const state = new Map(paintings.map((el) => [el, { api: null, ready: false, wanted: false, done: false }]));
+    const reveal = (el) => {
+      const s = state.get(el);
+      if (s.done || !s.wanted || !s.ready) return;
+      s.done = true;
+      el.classList.add('seen');
+      if (s.api) play(1700, (p) => s.api.draw(p));
+    };
     const wake = new IntersectionObserver((entries) => {
       for (const e of entries) if (e.isIntersecting) {
         wake.unobserve(e.target);
-        const p = paintings.find((q) => q.el === e.target);
-        p.gl = paintingGL(p.el);
-        p.shown = -1;
+        const s = state.get(e.target);
+        const made = paintingGL(e.target, (api) => { s.api = api; s.ready = true; reveal(e.target); });
+        if (!made) { s.ready = true; reveal(e.target); }
       }
-    }, { rootMargin: '900px 0px' });
-    paintings.forEach((p) => wake.observe(p.el));
+    }, { rootMargin: '700px 0px' });
+    const seen = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) {
+        seen.unobserve(e.target);
+        state.get(e.target).wanted = true;
+        reveal(e.target);
+      }
+    }, { threshold: .2 });
+    paintings.forEach((el) => { wake.observe(el); seen.observe(el); });
   }
-  if (reduced) paintings.forEach((p) => p.el.classList.add('seen'));
 
-  /* ---------- rings and machines ---------- */
-  const rings = [...document.querySelectorAll('.ring')];
-  const ringBox = document.getElementById('rings');
-  const mach = document.querySelector('.mach');
-  const machRow = document.getElementById('machRow');
-  const pinned = !reduced;
-  if (pinned) mach.classList.add('pinned');
+  /* ---------- cup rings ---------- */
+  const rings = [...document.querySelectorAll('.rings li')];
+  const setRing = (r, p) => r.style.setProperty('--p', `${(p * 372).toFixed(1)}deg`);
+  if (reduced) {
+    rings.forEach((r) => setRing(r, 1));
+  } else {
+    new IntersectionObserver((entries, io) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      rings.forEach((r, i) => setTimeout(() => play(1100, (p) => setRing(r, p)), i * 170));
+    }, { threshold: .3 }).observe(document.getElementById('rings'));
+  }
 
   /* ---------- bar ---------- */
   const bar = document.querySelector('.bar');
   const hero = document.querySelector('.hero');
   const end = document.querySelector('.end');
-
-  let vh = innerHeight, vw = innerWidth, ringTop = 0, ringH = 1, machTop = 0, travel = 0, heroH = 1, endTop = 1e9, soakH = 300;
-
-  function measure() {
-    vh = innerHeight;
-    vw = innerWidth;
-    const y = scrollY;
-    for (const p of paintings) {
-      const r = p.el.getBoundingClientRect();
-      p.top = r.top + y;
-      p.height = r.height;
-    }
-    const rr = ringBox.getBoundingClientRect();
-    ringTop = rr.top + y;
-    ringH = rr.height;
-    if (pinned) {
-      travel = Math.max(0, machRow.scrollWidth - vw + 40);
-      mach.style.height = `${vh + travel}px`;
-      machTop = mach.getBoundingClientRect().top + y;
-    }
-    heroH = hero.offsetHeight;
-    endTop = end.getBoundingClientRect().top + y;
-    soakH = end.querySelector('.soak').offsetHeight;
+  const soak = end.querySelector('.soak');
+  let queued = false;
+  function updateBar() {
+    queued = false;
+    bar.classList.toggle('past', scrollY > hero.offsetHeight * .55);
+    // The nav flips to light only once the soak behind it is dark enough.
+    bar.classList.toggle('dark', end.getBoundingClientRect().top + soak.offsetHeight * .62 < 40);
   }
-
-  const dripFig = document.querySelector('.drip');
-  const dripState = paintings.find((p) => p.el === dripFig);
-  let nextDrip = 0;
-  function tick() {
-    requestAnimationFrame(tick);
-    const y = scrollY;
-
-    for (const p of paintings) {
-      // Paint arrives between the picture entering and it sitting mid-screen.
-      const raw = clamp((y + vh - p.top - vh * .08) / (Math.min(p.height, vh) * .95));
-      const target = Math.max(p.p, raw);
-      p.p += (target - p.p) * .085;
-      if (target - p.p < .002) p.p = target;
-      if (Math.abs(p.p - p.shown) > .0015) {
-        p.shown = p.p;
-        if (p.gl) p.gl.draw(p.p);
-        if (p.p > .12) p.el.classList.add('seen');
-      }
-    }
-
-    const span = clamp((y + vh * .92 - ringTop) / (ringH * .95 + vh * .12));
-    rings.forEach((r, i) => {
-      const a = clamp((span - i * .13) / .36);
-      r.style.setProperty('--p', `${reduced ? 360 : (a * 372).toFixed(1)}deg`);
-      r.classList.toggle('on', a > .7 || reduced);
-    });
-
-    // The painted stream keeps dripping, and each drop lands on the real page.
-    if (dripFig && !reduced && window.Wet && performance.now() > nextDrip) {
-      const r = dripFig.getBoundingClientRect();
-      if (dripState.p > .85 && r.bottom > 40 && r.top < vh - 60) {
-        window.Wet.bloom(r.left + r.width * .505, r.top + r.height * .935, { reach: .011, ink: .9, tone: .85, push: 40 });
-        nextDrip = performance.now() + 2100 + Math.random() * 1500;
-      }
-    }
-
-    if (pinned) machRow.style.transform = `translate3d(${-clamp((y - machTop) / (travel || 1)) * travel}px,0,0)`;
-
-    bar.classList.toggle('past', y > heroH * .55);
-    bar.classList.toggle('dark', y + 40 > endTop + soakH * .62);
-  }
-
-  addEventListener('resize', measure);
-  addEventListener('load', measure);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  new ResizeObserver(measure).observe(document.body);
-  measure();
-  requestAnimationFrame(tick);
+  addEventListener('scroll', () => {
+    if (!queued) { queued = true; requestAnimationFrame(updateBar); }
+  }, { passive: true });
+  updateBar();
 
   /* The opening line waits for the word to land. */
-  setTimeout(() => root.classList.add('landed'), reduced ? 0 : 1500);
+  setTimeout(() => root.classList.add('landed'), reduced ? 0 : 1300);
 })();
