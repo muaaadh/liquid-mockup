@@ -6,12 +6,13 @@ MVR per sleeve of 10 including GST.
 A, B, R = "Arabica", "Arabica and Robusta", "Robusta"
 ESP, RIS, LUN, GRAN, MUG = 40, 25, 110, 150, 230
 
-def c(name, code, desc, inten, notes, species, origin, price, cups, rng, line="Original", decaf=False, process=None, species_note=None, slug=None):
-    return dict(id=slug or name.lower().replace(" ", "-").replace("è", "e"), name=name, code=code, desc=desc, intensity=inten,
+def c(name, code, desc, inten, notes, species, origin, price, cups, rng, line="Original", decaf=False, process=None, species_note=None, slug=None, price_text=None):
+    return dict(id=slug or name.lower().replace(" ", "-").replace("è", "e"), price_text=price_text, name=name, code=code, desc=desc, intensity=inten,
                 notes=notes, species=species, species_note=species_note, origin=origin, price=price, cups=cups,
                 range=rng, line=line, decaf=decaf, process=process)
 
 IT, MO, WE, BC, CL = "Ispirazione Italiana", "Master Origins", "World Explorations", "Barista Creations", "Classics"
+PR, ASK = "Professional", "Box of 50 pods. Ask us for pricing."
 COFFEES = [
  c("Capriccio","NSA0137","Rich and distinctive",5,["Cereal"],B,["Colombia","Brazil"],147,[ESP],CL),
  c("Volluto","NSA0132","Sweet and light",4,["Cereal"],A,["Costa Rica","Kenya"],147,[ESP],CL),
@@ -60,6 +61,15 @@ COFFEES = [
  c("Roasted Hazelnut","NSA0812","Rich and nutty",None,["Hazelnut"],A,["Brazil","Ethiopia"],307,[MUG],BC,"Vertuo"),
  c("Golden Caramel","NSA0811","Creamy and biscuity",None,["Caramel"],None,[],307,[MUG],BC,"Vertuo"),
  c("Costa Rica","NSA0819","Malty and sweet",7,["Nutty","Balanced"],A,["Costa Rica"],307,[GRAN],"Master Crafted Single Origins","Vertuo",process="Fully washed"),
+ # Professional pods, from liquid.com.mv/pods.html. Prices there may be out of date, so none are shown.
+ c("Forte Pro","","Malty, with jammy red fruit",7,["Malty","Red fruit"],A,["South America","Central America"],None,[],PR,"Professional",price_text=ASK),
+ c("Leggero Pro","","Velvety and smooth",6,["Cocoa","Cereal"],None,[],None,[],PR,"Professional",price_text=ASK),
+ c("Intenso Pro","","Round and roasted, with low acidity",8,["Cocoa","Roasted"],B,[],None,[],PR,"Professional",price_text=ASK),
+ c("Finezzo Pro","","Delicate and floral",5,["Jasmine","Orange blossom","Bergamot"],A,[],None,[],PR,"Professional",price_text=ASK),
+ c("Decaffeinato Pro","","Full-bodied decaf",7,["Cocoa","Roasted cereal"],None,[],None,[],PR,"Professional",decaf=True,price_text=ASK),
+ c("Ristresso Pro","","Intense and roasty",9,["Cocoa","Woody"],None,[],None,[],PR,"Professional",price_text=ASK),
+ c("Ristresso Intenso Pro","","Bitter and full-bodied",12,["Spicy pepper","Woody"],None,[],None,[],PR,"Professional",price_text=ASK),
+ c("Lungo Origin Guatemala Pro","","Silky, with dry malty notes",6,["Cereal","Malty"],B,["Guatemala"],None,[],PR,"Professional",price_text=ASK),
 ]
 # Tone for coffees with no printed intensity, so the bean still looks right.
 MILK_TONE = {"Corto":11,"Scuro":9,"Chiaro":6,"Caramello":6,"Vaniglia":5,"Cioccolatino":7,"Nocciola":7,"Roasted Hazelnut":8,"Golden Caramel":6}

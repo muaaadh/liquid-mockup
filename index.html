@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Liquid | Nespresso in the Maldives</title>
-<meta name="description" content="Liquid is the exclusive distributor of Nespresso in the Maldives. Explore all 46 coffees, find a machine and visit the boutique in Malé.">
+<title>Liquid | Nespresso for Maldives resorts</title>
+<meta name="description" content="Liquid is the exclusive distributor of Nespresso in the Maldives, supplying resorts, hotels and offices with coffee, machines and aftersales service.">
 <meta name="theme-color" content="#FBFAF7">
-<meta property="og:title" content="Liquid | Nespresso in the Maldives">
-<meta property="og:description" content="Elevate your coffee experience.">
+<meta property="og:title" content="Liquid | Nespresso for Maldives resorts">
+<meta property="og:description" content="Exclusive distributor of Nespresso in the Maldives since 2009.">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/urbanist.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Store","name":"Liquid Pvt Ltd","description":"Exclusive distributor of Nespresso in the Maldives","telephone":"+9603300773","email":"sales@liquid.com.mv","address":{"@type":"PostalAddress","streetAddress":"M. Bageechage, 1st floor, Fareedhee Magu","addressLocality":"Malé","addressCountry":"MV"},"sameAs":["https://www.instagram.com/liquid.mv/"]}
 </script>
 </head>
 <body>
-<a class="skip" href="#beans">Skip to the coffee beans</a>
+<a class="skip" href="#coffee">Skip to the coffee range</a>
 
 <!-- The wet layer behind the hero: the wordmark and the cursor's coffee. -->
 <canvas id="wet" aria-hidden="true"></canvas>
@@ -25,7 +26,8 @@
 <header class="bar">
   <a class="bar-logo" href="#top" aria-label="Liquid, back to top"><img src="assets/logo.svg" alt="" width="84" height="19"></a>
   <nav aria-label="Main">
-    <a href="#beans">Beans</a>
+    <a href="#resorts">Resorts</a>
+    <a href="#coffee">Coffee</a>
     <a href="#machines">Machines</a>
     <a href="#visit">Visit</a>
   </nav>
@@ -36,47 +38,76 @@
     <h1 class="sr">Liquid, exclusive distributor of Nespresso in the Maldives</h1>
     <div class="hero-mark" id="heroMark" aria-hidden="true"><img src="assets/logo.svg" alt=""></div>
     <div class="hero-text">
-      <p class="hero-line">Elevate your coffee experience.</p>
-      <p class="hero-note">Exclusive distributor of Nespresso in the Maldives</p>
-      <a class="cta" href="#beans">Explore the beans</a>
+      <p class="hero-line">Elevate your guests' coffee experience.</p>
+      <p class="hero-note">Exclusive distributor of Nespresso in the Maldives since 2009</p>
+      <div class="hero-cta">
+        <a class="cta" href="mailto:sales@liquid.com.mv?subject=Nespresso%20for%20our%20resort">Talk to our team</a>
+        <a class="cta ghost" href="#coffee">See the coffee range</a>
+      </div>
     </div>
   </section>
 
-  <section class="beans-sec" id="beans" aria-labelledby="t-beans">
+  <section class="resorts" id="resorts" aria-labelledby="t-resorts">
+    <figure class="painting island" data-seed="0.5,0.5">
+      <picture><source media="(max-width: 700px)" srcset="assets/maldives/island-m.webp"><img src="assets/maldives/island.webp" width="2000" height="944" alt="A resort island and its ring of overwater villas in a turquoise Maldivian lagoon" loading="lazy"></picture>
+    </figure>
+    <div class="sec-head">
+      <h2 id="t-resorts">For resorts and hotels</h2>
+      <p>The Maldives tourism sector is our main market. Everything we supply is imported from Nespresso Switzerland.</p>
+    </div>
+    <div class="rcards">
+      <article>
+        <figure class="painting" data-seed="0.5,0.5"><picture><source media="(max-width: 700px)" srcset="assets/maldives/deck-m.webp"><img src="assets/maldives/deck.webp" width="1200" height="800" alt="A private overwater deck with wicker chairs and a small table above the lagoon" loading="lazy"></picture></figure>
+        <h3>Rooms and villas</h3>
+        <p>Original machines and capsules, with hotel capsule presentation boxes.</p>
+      </article>
+      <article>
+        <figure class="painting" data-seed="0.5,0.5"><picture><source media="(max-width: 700px)" srcset="assets/maldives/restaurant-m.webp"><img src="assets/maldives/restaurant.webp" width="1200" height="800" alt="Timber tables on a restaurant deck over the sea" loading="lazy"></picture></figure>
+        <h3>Restaurants and bars</h3>
+        <p>Professional machines with two heads and fresh-milk recipes.</p>
+      </article>
+      <article>
+        <figure class="painting" data-seed="0.5,0.4"><picture><source media="(max-width: 700px)" srcset="assets/maldives/cup-m.webp"><img src="assets/maldives/cup.webp" width="1200" height="800" alt="A cup of coffee set on the sand at the edge of the water" loading="lazy"></picture></figure>
+        <h3>Service in Malé</h3>
+        <p>Free diagnosis at our Service Center. No repair starts until you approve the quote.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="coffee-sec" id="coffee" aria-labelledby="t-coffee">
     <div class="explorer">
       <div class="picker">
         <div class="sec-head">
-          <h2 id="t-beans">Coffee beans</h2>
-          <p>Choose a bean to see the coffee.</p>
+          <h2 id="t-coffee">The coffee range</h2>
+          <p>Choose a capsule to see the coffee.</p>
         </div>
         <div class="filters">
           <div class="seg" role="group" aria-labelledby="l-bean">
             <span class="seg-label" id="l-bean">Bean</span>
             <button type="button" data-species="all" aria-pressed="true">All</button>
-            <button type="button" data-species="Arabica" aria-pressed="false"><img src="assets/beans/arpeggio-s.webp" alt="" width="24" height="24">Arabica</button>
-            <button type="button" data-species="Robusta" aria-pressed="false"><img src="assets/beans/kazaar-s.webp" alt="" width="24" height="24">Robusta</button>
-            <button type="button" data-species="Arabica and Robusta" aria-pressed="false"><img src="assets/beans/ristretto-s.webp" alt="" width="24" height="24">Blend</button>
+            <button type="button" data-species="Arabica" aria-pressed="false">Arabica</button>
+            <button type="button" data-species="Robusta" aria-pressed="false">Robusta</button>
+            <button type="button" data-species="Arabica and Robusta" aria-pressed="false">Blend</button>
           </div>
           <div class="seg" role="group" aria-labelledby="l-machine">
             <span class="seg-label" id="l-machine">Machine</span>
             <button type="button" data-line="all" aria-pressed="true">All</button>
             <button type="button" data-line="Original" aria-pressed="false">Original</button>
             <button type="button" data-line="Vertuo" aria-pressed="false">Vertuo</button>
+            <button type="button" data-line="Professional" aria-pressed="false">Professional</button>
           </div>
         </div>
         <p class="type-note" id="typeNote"></p>
         <div class="grid" id="grid" role="group" aria-label="Coffees, lightest to darkest"></div>
         <p class="empty" id="empty" hidden>No coffees match that choice. <button type="button" id="reset">Show all coffees</button></p>
+        <noscript><p class="empty">See the <a href="https://drive.google.com/file/d/1EcH2iHNyFHpZPsKJGeVZNXzVaKZPt-7A/view">Original</a> and <a href="https://drive.google.com/file/d/1WwFaT_lDSmkSAPgLnaZtZZ9aFgGDoOtv/view">Vertuo</a> catalogues.</p></noscript>
       </div>
 
-      <div class="scrim" id="scrim" hidden></div>
       <aside class="detail" id="detail" aria-label="Selected coffee">
-        <button type="button" class="detail-close" id="dClose">Close</button>
         <div class="detail-body" id="dBody">
           <div class="detail-art">
-            <img class="pool" id="dPool" src="assets/pool.webp" alt="" loading="lazy">
-            <img class="big" id="dBean" alt="">
-            <img class="capsule" id="dCapsule" alt="">
+            <img class="pool" src="assets/pool.webp" alt="" loading="lazy">
+            <img class="big" id="dPod" alt="">
           </div>
           <h3 id="dName"></h3>
           <p class="detail-desc" id="dDesc"></p>
@@ -85,23 +116,144 @@
           <p class="price" id="dPrice"></p>
         </div>
       </aside>
-      <p class="sr" id="dStatus" aria-live="polite"></p>
     </div>
+    <dialog class="sheet" id="sheet" aria-label="Selected coffee"><button type="button" class="sheet-close" id="dClose">Close</button></dialog>
+    <p class="sr" id="dStatus" aria-live="polite"></p>
   </section>
 
-  <section class="gallery" aria-label="Paintings">
-    <figure class="painting" data-seed="0.72,0.38">
-      <img src="assets/paint/branch.webp" width="1700" height="1134" alt="Coffee cherries ripening on a branch, painted in coffee" loading="lazy">
-      <figcaption>Ripening on the branch</figcaption>
-    </figure>
-    <figure class="painting" data-seed="0.5,0.55">
-      <img src="assets/paint/glass.webp" width="1500" height="1545" alt="An espresso in a small glass on a saucer, painted in coffee" loading="lazy">
-      <figcaption>Short and hot</figcaption>
-    </figure>
-    <figure class="painting" data-seed="0.5,0.6">
-      <img src="assets/paint/swirl.webp" width="1300" height="1591" alt="Milk swirling through iced coffee in a tall glass, painted in coffee" loading="lazy">
-      <figcaption>Long, over ice</figcaption>
-    </figure>
+  <section class="how" id="how" aria-labelledby="t-how">
+    <div class="sec-head">
+      <h2 id="t-how">How the machine works</h2>
+      <p>One capsule, one button.</p>
+    </div>
+    <div class="film-wrap">
+      <video class="film" id="film" muted loop playsinline preload="none" poster="assets/film/poster.webp" data-src="assets/film/machine.mp4" data-src-m="assets/film/machine-m.mp4" aria-label="A hand lifts the lever of a Nespresso machine, drops in a capsule and closes it, then coffee pours into a glass."></video>
+    </div>
+    <div class="how-grid">
+      <div class="how-stage">
+        <svg viewBox="70 -40 760 720" role="img" aria-label="Cutaway of a Nespresso machine: a capsule drops into the head, water from the tank is heated and pumped through it at 19 bars, coffee pours into a glass, and the used capsule falls into a container.">
+          <defs>
+            <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d3029"/><stop offset=".55" stop-color="#231a15"/><stop offset="1" stop-color="#120c09"/></linearGradient>
+            <linearGradient id="gInner" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1511"/><stop offset="1" stop-color="#16100c"/></linearGradient>
+            <linearGradient id="gChrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fafaf8"/><stop offset=".45" stop-color="#b9b6b0"/><stop offset=".6" stop-color="#8d8a85"/><stop offset="1" stop-color="#e4e2dd"/></linearGradient>
+            <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fdcee"/><stop offset="1" stop-color="#1b8fb5"/></linearGradient>
+            <linearGradient id="gCoffee" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a3216"/><stop offset="1" stop-color="#231107"/></linearGradient>
+            <linearGradient id="gCrema" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2b478"/><stop offset="1" stop-color="#b47a3c"/></linearGradient>
+            <linearGradient id="gPod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4fb0"/><stop offset=".5" stop-color="#3f2478"/><stop offset="1" stop-color="#22123f"/></linearGradient>
+            <linearGradient id="gStream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5526"/><stop offset="1" stop-color="#3a1e0c"/></linearGradient>
+            <radialGradient id="gHeat"><stop offset="0" stop-color="#ff9a3c" stop-opacity=".9"/><stop offset="1" stop-color="#ff5a1e" stop-opacity="0"/></radialGradient>
+            <filter id="fSoft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+            <filter id="fSteam" x="-60%" y="-20%" width="220%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter>
+            <clipPath id="cCup"><path d="M668 474 L677 580 Q678 586 684 586 L736 586 Q742 586 743 580 L752 474 Z"/></clipPath>
+            <clipPath id="cTank"><rect x="96" y="182" width="104" height="408" rx="14"/></clipPath>
+          </defs>
+
+          <ellipse cx="470" cy="670" rx="392" ry="15" fill="#1f120a" opacity=".14" filter="url(#fSoft)"/>
+
+          <!-- Water tank -->
+          <g>
+            <rect x="96" y="182" width="104" height="408" rx="14" fill="#eef6f7"/>
+            <g clip-path="url(#cTank)"><rect id="hTank" x="96" y="240" width="104" height="360" fill="url(#gWater)" opacity=".9"/></g>
+            <rect x="96" y="182" width="104" height="408" rx="14" fill="none" stroke="#a9b7ba" stroke-width="2"/>
+            <rect x="108" y="196" width="9" height="380" rx="4.5" fill="#fff" opacity=".42"/>
+            <rect x="88" y="164" width="120" height="26" rx="10" fill="#231a15"/>
+          </g>
+
+          <!-- Body and base -->
+          <path d="M190 150 Q190 92 248 92 L694 92 Q776 92 776 172 L776 252 Q776 292 736 292 L544 292 L544 604 L190 604 Z" fill="url(#gBody)"/>
+          <rect x="170" y="596" width="640" height="60" rx="22" fill="url(#gBody)"/>
+          <rect x="552" y="586" width="248" height="11" rx="5" fill="url(#gChrome)"/>
+
+          <!-- The opened side of the machine -->
+          <path d="M214 148 Q214 118 244 118 L722 118 Q752 118 752 148 L752 244 Q752 270 726 270 L520 270 L520 556 Q520 578 498 578 L236 578 Q214 578 214 556 Z" fill="url(#gInner)" stroke="#fff" stroke-opacity=".07"/>
+
+          <!-- Pipes -->
+          <path d="M200 556 H262" fill="none" stroke="#3a3029" stroke-width="9"/>
+          <path d="M308 512 V468 H384" fill="none" stroke="#3a3029" stroke-width="9" stroke-linejoin="round"/>
+          <path d="M440 396 V196 H572" fill="none" stroke="#3a3029" stroke-width="9" stroke-linejoin="round"/>
+          <path id="hCold" d="M200 556 H308 V468 H384" fill="none" stroke="#4cc3df" stroke-width="7" stroke-linejoin="round"/>
+          <path id="hColdFlow" d="M200 556 H308 V468 H384" fill="none" stroke="#d6f5fb" stroke-width="2" stroke-dasharray="5 15" stroke-linecap="round" opacity="0"/>
+          <path id="hHot" d="M440 396 V196 H572" fill="none" stroke="#ff8a3c" stroke-width="7" stroke-linejoin="round"/>
+          <path id="hHotFlow" d="M440 396 V196 H572" fill="none" stroke="#ffe0bd" stroke-width="2" stroke-dasharray="5 15" stroke-linecap="round" opacity="0"/>
+
+          <!-- Pump -->
+          <rect x="262" y="512" width="92" height="56" rx="10" fill="#2f2620" stroke="#fff" stroke-opacity=".12"/>
+          <circle cx="308" cy="540" r="15" fill="none" stroke="#6d5f54" stroke-width="3"/>
+          <circle cx="308" cy="540" r="4" fill="#6d5f54"/>
+
+          <!-- Pressure gauge -->
+          <circle cx="308" cy="402" r="50" fill="#fbfaf7"/>
+          <path d="M264.700 427 A50 50 0 1 1 351.300 427" fill="none" stroke="#d8cfc2" stroke-width="4"/>
+          <path d="M268 425 A46 46 0 1 1 348 425" fill="none" stroke="#b98a4e" stroke-width="3" stroke-dasharray="1 13.4"/>
+          <g id="hNeedle"><path d="M308 402 L305.500 396 L308 360 L310.500 396 Z" fill="#b5301c"/></g>
+          <circle cx="308" cy="402" r="5.500" fill="#1f120a"/>
+          <text x="308" y="436" text-anchor="middle" font-size="19" font-weight="600" fill="#1f120a"><tspan id="hBars">0</tspan></text>
+          <text x="308" y="447" text-anchor="middle" font-size="9.500" fill="#6b5240">bar</text>
+
+          <!-- Heater -->
+          <circle cx="440" cy="456" r="88" fill="url(#gHeat)" id="hHeatGlow" opacity="0"/>
+          <rect x="384" y="396" width="112" height="120" rx="14" fill="#2f2620" stroke="#fff" stroke-opacity=".12"/>
+          <path id="hCoil" d="M398 420 H482 M482 420 Q492 432 482 444 H398 Q388 456 398 468 H482 Q492 480 482 492 H398" fill="none" stroke="#786858" stroke-width="5" stroke-linecap="round"/>
+
+          <!-- Brew chamber -->
+          <rect x="540" y="152" width="44" height="88" rx="8" fill="#3a3029"/>
+          <g id="hSpikes"><path d="M584 182 l13 5 l-13 5 Z M584 201 l13 5 l-13 5 Z" fill="url(#gChrome)"/></g>
+          <rect x="676" y="146" width="22" height="100" rx="6" fill="#3a3029"/>
+          <path d="M694 198 H710 V288" fill="none" stroke="#3a3029" stroke-width="9"/>
+          <path id="hChan" d="M694 198 H710 V288" fill="none" stroke="#8a5526" stroke-width="7"/>
+
+          <!-- Capsule -->
+          <g id="hCapsule" style="opacity:0">
+            <path d="M34 -35 L-22 -17 Q-37 -13 -37 0 Q-37 13 -22 17 L34 35 Z" fill="url(#gPod)"/>
+            <path d="M28 -24 L-18 -10" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+            <rect x="32" y="-40" width="8" height="80" rx="4" fill="url(#gChrome)"/>
+          </g>
+
+          <!-- Spout -->
+          <path d="M684 288 H736 L726 320 H694 Z" fill="url(#gChrome)"/>
+
+          <!-- Used capsule bin -->
+          <path d="M600 292 V462" stroke="#c4bcb0" stroke-width="2" stroke-dasharray="3 7" fill="none"/>
+          <rect x="552" y="468" width="100" height="118" rx="10" fill="#fff" fill-opacity=".5" stroke="#b9b0a3" stroke-width="2"/>
+          <g id="hUsed" style="opacity:0"><g transform="translate(606 540) rotate(72)">
+            <path d="M34 -35 L-22 -17 Q-37 -13 -37 0 Q-37 13 -22 17 L34 35 Z" fill="url(#gPod)"/>
+            <rect x="32" y="-40" width="8" height="80" rx="4" fill="url(#gChrome)"/>
+          </g></g>
+
+          <!-- Lever -->
+          <g id="hLever">
+            <path d="M574 72 H752 Q768 72 768 86 Q768 100 752 100 H574 Q590 86 574 72 Z" fill="url(#gChrome)"/>
+            <circle cx="590" cy="86" r="17" fill="url(#gChrome)"/>
+            <circle cx="590" cy="86" r="6" fill="#8d8a85"/>
+          </g>
+
+          <!-- Button -->
+          <circle cx="262" cy="150" r="13" fill="#2f2620" stroke="#fff" stroke-opacity=".2"/>
+          <circle id="hLed" cx="262" cy="150" r="6.500" fill="#ffd9a0"/>
+
+          <!-- Glass, coffee and steam -->
+          <path id="hStream" d="M710 318 V320" fill="none" stroke="url(#gStream)" stroke-linecap="round" style="opacity:0"/>
+          <g clip-path="url(#cCup)">
+            <rect id="hLiquid" x="660" y="584" width="100" height="6" fill="url(#gCoffee)"/>
+            <rect id="hCrema" x="660" y="584" width="100" height="0" fill="url(#gCrema)" style="opacity:0"/>
+          </g>
+          <path d="M664 470 L674 582 Q675 590 683 590 L737 590 Q745 590 746 582 L756 470" fill="none" stroke="#a79e92" stroke-width="2.500"/>
+          <path d="M664 470 H756" fill="none" stroke="#c9c1b6" stroke-width="2"/>
+          <path d="M677 482 L684 574" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round"/>
+          <g id="hSteam" fill="none" stroke="#b9ab9b" stroke-width="5" stroke-linecap="round" stroke-dasharray="26 34" filter="url(#fSteam)" style="opacity:0">
+            <path d="M694 458 q-10 -20 0 -40 q10 -20 0 -40"/>
+            <path d="M726 458 q10 -20 0 -40 q-10 -20 0 -40"/>
+          </g>
+        </svg>
+      </div>
+      <ol class="how-steps">
+        <li><button type="button"><b>Drop in a capsule</b><span>Lift the lever, drop a capsule in and close it.</span></button></li>
+        <li><button type="button"><b>Water heats up</b><span>Press the button. Water from the tank heats in as little as 25 seconds.</span></button></li>
+        <li><button type="button"><b>19 bars of pressure</b><span>The capsule is pierced and the pump drives hot water through the coffee.</span></button></li>
+        <li><button type="button"><b>Coffee pours</b><span>Espresso runs into the cup with crema on top.</span></button></li>
+        <li><button type="button"><b>Capsule drops away</b><span>Lift the lever and the used capsule falls into the container.</span></button></li>
+      </ol>
+    </div>
   </section>
 
   <section class="cups" aria-labelledby="t-cups">
@@ -126,16 +278,31 @@
   <section class="machines" id="machines" aria-labelledby="t-mach">
     <div class="sec-head">
       <h2 id="t-mach">Machines</h2>
+    </div>
+    <div class="mhead">
+      <h3>Professional</h3>
+      <p>For restaurants, bars, lounges and offices. <a href="mailto:sales@liquid.com.mv?subject=Nespresso%20Professional%20pricing">Ask us for pricing</a></p>
+    </div>
+    <div class="mgrid">
+      <figure><img src="assets/machines/aguila-220.webp" srcset="assets/machines/aguila-220-m.webp 420w, assets/machines/aguila-220.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="760" height="699" alt="Aguila 220 machine" loading="lazy"><figcaption>Aguila 220<span>Two heads and fresh milk, for peak periods</span></figcaption></figure>
+      <figure><img src="assets/machines/gemini.webp" srcset="assets/machines/gemini-m.webp 420w, assets/machines/gemini.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="760" height="557" alt="Gemini CS223 machine" loading="lazy"><figcaption>Gemini CS223<span>Two heads with fresh-milk drinks</span></figcaption></figure>
+      <figure><img src="assets/machines/momento-120.webp" srcset="assets/machines/momento-120-m.webp 420w, assets/machines/momento-120.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="760" height="621" alt="Momento Coffee and Milk machine" loading="lazy"><figcaption>Momento Coffee &amp; Milk<span>One-touch fresh-milk recipes</span></figcaption></figure>
+      <figure><img src="assets/machines/momento-200.webp" srcset="assets/machines/momento-200-m.webp 420w, assets/machines/momento-200.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="760" height="622" alt="Momento 200 machine" loading="lazy"><figcaption>Momento 200<span>Two coffees at once, plus hot water</span></figcaption></figure>
+      <figure><img src="assets/machines/momento-100.webp" srcset="assets/machines/momento-100-m.webp 420w, assets/machines/momento-100.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="650" height="760" alt="Momento 100 machine" loading="lazy"><figcaption>Momento 100<span>Four cup sizes, plus hot water</span></figcaption></figure>
+      <figure><img src="assets/machines/zenius.webp" srcset="assets/machines/zenius-m.webp 420w, assets/machines/zenius.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="572" height="760" alt="Zenius ZN100 machine" loading="lazy"><figcaption>Zenius ZN100<span>Compact, for coffee and hot water</span></figcaption></figure>
+    </div>
+    <div class="mhead">
+      <h3>Original</h3>
       <p>Prices include GST.</p>
     </div>
     <div class="mgrid">
-      <figure><img src="assets/machines/essenza.webp" alt="Essenza Mini, painted in coffee" loading="lazy"><figcaption>Essenza Mini<span>MVR 2,735</span></figcaption></figure>
-      <figure><img src="assets/machines/inissia.webp" alt="Inissia, painted in coffee" loading="lazy"><figcaption>Inissia<span>MVR 2,860</span></figcaption></figure>
-      <figure><img src="assets/machines/pixie.webp" alt="Pixie, painted in coffee" loading="lazy"><figcaption>Pixie<span>MVR 4,337</span></figcaption></figure>
-      <figure><img src="assets/machines/citiz.webp" alt="CitiZ, painted in coffee" loading="lazy"><figcaption>CitiZ<span>MVR 4,940</span></figcaption></figure>
-      <figure><img src="assets/machines/citiz-milk.webp" alt="CitiZ and Milk, painted in coffee" loading="lazy"><figcaption>CitiZ &amp; Milk<span>MVR 7,395</span></figcaption></figure>
-      <figure><img src="assets/machines/lattissima.webp" alt="Lattissima One, painted in coffee" loading="lazy"><figcaption>Lattissima One<span>MVR 8,020</span></figcaption></figure>
-      <figure><img src="assets/machines/creatista.webp" alt="Creatista Plus, painted in coffee" loading="lazy"><figcaption>Creatista Plus<span>MVR 11,125</span></figcaption></figure>
+      <figure><img src="assets/machines/essenza-mini.webp" srcset="assets/machines/essenza-mini-m.webp 420w, assets/machines/essenza-mini.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="470" height="760" alt="Essenza Mini machine" loading="lazy"><figcaption>Essenza Mini<span>MVR 2,735</span></figcaption></figure>
+      <figure><img src="assets/machines/inissia.webp" srcset="assets/machines/inissia-m.webp 420w, assets/machines/inissia.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="533" height="760" alt="Inissia machine" loading="lazy"><figcaption>Inissia<span>MVR 2,860</span></figcaption></figure>
+      <figure><img src="assets/machines/pixie.webp" srcset="assets/machines/pixie-m.webp 420w, assets/machines/pixie.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="597" height="760" alt="Pixie machine" loading="lazy"><figcaption>Pixie<span>MVR 4,337</span></figcaption></figure>
+      <figure><img src="assets/machines/citiz.webp" srcset="assets/machines/citiz-m.webp 420w, assets/machines/citiz.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="485" height="760" alt="CitiZ machine" loading="lazy"><figcaption>CitiZ<span>MVR 4,940</span></figcaption></figure>
+      <figure><img src="assets/machines/citiz-milk.webp" srcset="assets/machines/citiz-milk-m.webp 420w, assets/machines/citiz-milk.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="628" height="760" alt="CitiZ and Milk machine" loading="lazy"><figcaption>CitiZ &amp; Milk<span>MVR 7,395</span></figcaption></figure>
+      <figure><img src="assets/machines/lattissima-one.webp" srcset="assets/machines/lattissima-one-m.webp 420w, assets/machines/lattissima-one.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="589" height="760" alt="Lattissima One machine" loading="lazy"><figcaption>Lattissima One<span>MVR 8,020</span></figcaption></figure>
+      <figure><img src="assets/machines/creatista-plus.webp" srcset="assets/machines/creatista-plus-m.webp 420w, assets/machines/creatista-plus.webp 760w" sizes="(max-width: 759px) 46vw, 24vw" width="530" height="760" alt="Creatista Plus machine" loading="lazy"><figcaption>Creatista Plus<span>MVR 11,125</span></figcaption></figure>
     </div>
   </section>
 </main>
@@ -159,9 +326,9 @@
         </ul>
       </div>
       <div>
-        <p class="end-label">For resorts and offices</p>
-        <p>Nespresso Professional coffee and machines, with aftersales service.</p>
-        <p><a href="mailto:sales@liquid.com.mv?subject=Nespresso%20for%20business">Email the team</a></p>
+        <p class="end-label">For resorts and hotels</p>
+        <p>Machines, capsules, professional pods and accessories, with aftersales service.</p>
+        <p><a href="mailto:sales@liquid.com.mv?subject=Nespresso%20for%20our%20resort">Email the team</a></p>
       </div>
     </div>
     <div class="end-foot">
@@ -171,10 +338,11 @@
   </div>
 </footer>
 
-<script src="js/logo.js"></script>
-<script src="js/data.js"></script>
-<script src="js/wet.js"></script>
-<script src="js/beans.js"></script>
-<script src="js/main.js"></script>
+<script src="js/logo.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/data.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/wet.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/coffee.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/how.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script src="js/main.js" onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

@@ -77,6 +77,8 @@
         gl.uniform2f(gl.getUniformLocation(prog, 'seed'), seed[0], seed[1]);
         api.draw(0);
         fig.classList.add('gl');
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label', img.alt);
         img.after(canvas);
         onReady(api);
       } catch (err) {
@@ -132,15 +134,31 @@
     }, { threshold: .3 }).observe(document.getElementById('rings'));
   }
 
+  /* ---------- the film ---------- */
+  const film = document.getElementById('film');
+  if (reduced) {
+    film.src = film.dataset.src;
+    film.controls = true;
+    film.preload = 'metadata';
+  } else {
+    new IntersectionObserver((entries) => {
+      const on = entries[0].isIntersecting;
+      if (on && !film.src) film.src = innerWidth < 760 ? film.dataset.srcM : film.dataset.src;
+      if (on) film.play().catch(() => { film.controls = true; }); else film.pause();
+    }, { threshold: .25 }).observe(film);
+  }
+
   /* ---------- bar ---------- */
   const bar = document.querySelector('.bar');
-  const hero = document.querySelector('.hero');
+  const mark = document.getElementById('heroMark');
+  const nav = bar.querySelector('nav');
   const end = document.querySelector('.end');
   const soak = end.querySelector('.soak');
   let queued = false;
   function updateBar() {
     queued = false;
-    bar.classList.toggle('past', scrollY > hero.offsetHeight * .55);
+    // The backdrop arrives as the wordmark reaches the nav, so the links never sit on it.
+    bar.classList.toggle('past', mark.getBoundingClientRect().top < nav.getBoundingClientRect().bottom + 8);
     // The nav flips to light only once the soak behind it is dark enough.
     bar.classList.toggle('dark', end.getBoundingClientRect().top + soak.offsetHeight * .62 < 40);
   }
